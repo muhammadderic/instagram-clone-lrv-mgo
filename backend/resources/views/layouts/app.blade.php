@@ -77,8 +77,7 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <!-- route to profile.show, Auth::user()->id -->
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">
                   Profile
                 </a>
 
