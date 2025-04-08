@@ -28,27 +28,7 @@
         <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top">
 
         <div class="card-body">
-          <div class="d-flex mb-2">
-            @if($post->likes->where('user_id', auth()->id())->count() > 0)
-            <form action="{{ route('likes.destroy', $post->id) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-link p-0 me-2">
-                <i class="fas fa-heart text-danger"></i>
-              </button>
-            </form>
-            @else
-            <form action="{{ route('likes.store', $post->id) }}" method="POST">
-              @csrf
-              <button type="submit" class="btn btn-link p-0 me-2">
-                <i class="far fa-heart"></i>
-              </button>
-            </form>
-            @endif
-            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-link p-0">
-              <i class="far fa-comment"></i>
-            </a>
-          </div>
+          <!-- create and remove likes -->
 
           <p>
             <strong>{{ $post->likes->count() }} likes</strong>
