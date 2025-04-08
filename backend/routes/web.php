@@ -17,3 +17,5 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 // Profile routes
 Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.show');
+Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');

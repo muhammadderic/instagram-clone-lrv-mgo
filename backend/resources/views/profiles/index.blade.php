@@ -17,8 +17,7 @@
         </h1>
 
         @if(auth()->id() === $user->id)
-        <!-- route to profile.edit, $user->id -->
-        <a href="#" class="btn btn-outline-secondary ms-4">
+        <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-outline-secondary ms-4">
           Edit Profile
         </a>
         @endif
