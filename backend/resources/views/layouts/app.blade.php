@@ -58,8 +58,7 @@
             @endif
             @else
             <li class="nav-item">
-              <!-- route to posts.create -->
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ route('posts.create') }}">
                 <i class="fa fa-plus-square"></i> New Post
               </a>
             </li>
