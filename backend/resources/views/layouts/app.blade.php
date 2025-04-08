@@ -58,7 +58,8 @@
             @endif
             @else
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('posts.create') }}">
+              <!-- route to posts.create -->
+              <a class="nav-link" href="#">
                 <i class="fa fa-plus-square"></i> New Post
               </a>
             </li>
@@ -76,7 +77,8 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">
+                <!-- route to profile.show, Auth::user()->id -->
+                <a class="dropdown-item" href="#">
                   Profile
                 </a>
 
