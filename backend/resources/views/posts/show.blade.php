@@ -94,11 +94,47 @@
 
       <hr>
 
-      <!-- show and delete comment -->
+      <div class="comments-section" style="max-height: 300px; overflow-y: auto;">
+        @foreach($post->comments as $comment)
+        <div class="d-flex mb-2">
+          @if($comment->user)
+          <strong class="me-2">{{ $comment->user->username }}</strong>
+          @else
+          <strong class="me-2">Deleted User</strong>
+          @endif
+          <p class="mb-0">{{ $comment->comment }}</p>
+
+          @if(auth()->id() === $comment->user_id || auth()->id() === $post->user_id)
+          <form
+            action="{{ route('comments.destroy', $comment->id) }}"
+            method="POST"
+            class="ms-auto">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-link p-0 text-danger">
+              <i class="fas fa-times"></i>
+            </button>
+          </form>
+          @endif
+        </div>
+        @endforeach
+      </div>
 
       <hr>
 
-      <!-- create a comment -->
+      <form action="{{ route('comments.store', $post->id) }}" method="POST">
+        @csrf
+        <div class="input-group">
+          <input
+            type="text"
+            name="comment"
+            class="form-control"
+            placeholder="Add a comment..."
+            required>
+
+          <button class="btn btn-outline-primary" type="submit">Post</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
