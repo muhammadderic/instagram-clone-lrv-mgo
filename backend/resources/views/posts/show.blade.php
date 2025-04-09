@@ -30,7 +30,18 @@
             <i class="fas fa-ellipsis-v"></i>
           </button>
 
-          <!-- edit and delete post -->
+          <ul class="dropdown-menu" aria-labelledby="postOptions">
+            <li>
+              <a class="dropdown-item" href="{{ route('posts.edit', $post->id) }}">Edit</a>
+            </li>
+            <li>
+              <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="dropdown-item text-danger">Delete</button>
+              </form>
+            </li>
+          </ul>
         </div>
         @endif
         @else

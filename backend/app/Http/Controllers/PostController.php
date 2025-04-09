@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -43,5 +44,47 @@ class PostController extends Controller
   public function show(Post $post)
   {
     return view('posts.show', compact('post'));
+  }
+
+  public function edit(Post $post)
+  {
+    // Check if the authenticated user is the same as the post user
+    if (auth()->id() !== $post->user_id) {
+      abort(403, 'Unauthorized action.');
+    }
+
+    return view('posts.edit', compact('post'));
+  }
+
+  public function update(Request $request, Post $post)
+  {
+    // Check if the authenticated user is the same as the post user
+    if (auth()->id() !== $post->user_id) {
+      abort(403, 'Unauthorized action.');
+    }
+
+    $data = $request->validate([
+      'caption' => 'required',
+    ]);
+
+    $post->update($data);
+
+    return redirect('/posts/' . $post->id);
+  }
+
+  public function destroy(Post $post)
+  {
+    // Check if the authenticated user is the same as the post user
+    if (auth()->id() !== $post->user_id) {
+      abort(403, 'Unauthorized action.');
+    }
+
+    // Delete the image file
+    Storage::disk('public')->delete($post->image_path);
+
+    // Delete the post
+    $post->delete();
+
+    return redirect('/profile/' . auth()->user()->id);
   }
 }
